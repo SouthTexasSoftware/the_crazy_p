@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CrazyProduct } from 'src/routes/customTypes';
+	import type { CrazyProduct } from '../../../customTypes';
 	import { firebaseStore, inventoryStore, alertStore } from '../../../customStores';
 	import type { PageData } from './$types';
 	import { getDownloadURL, ref } from 'firebase/storage';

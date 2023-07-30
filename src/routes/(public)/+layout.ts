@@ -4,22 +4,27 @@ import type { LayoutLoad } from './$types';
 
 export const load = (({ url }) => {
 	let pagePathList = url.pathname.split('/').slice(1);
-	let titleIndex = pagePathList.length === 1 ? 0 : 1;
-	let title = formatCapitalizedString(pagePathList[titleIndex], true);
+	let titleIndex = pagePathList[-1];
+	let title = formatCapitalizedString(pagePathList[pagePathList.length - 1], true);
 
 	let crumbs: { name: string; path: string }[] = [];
-	pagePathList.forEach((pathname) => {
-		crumbs = [
-			...crumbs,
-			{
-				name: formatCapitalizedString(pathname, false),
-				path: '/' + pathname
+	pagePathList.forEach((pathname, index) => {
+		let fullPath = '/' + pathname;
+		if (index > 0) {
+			fullPath = '';
+			for (let n = 0; n < index + 1; n++) {
+				let prevPath = '/' + pagePathList[n];
+				fullPath += prevPath;
 			}
-		];
+		}
+		crumbs.push({
+			name: formatCapitalizedString(pathname, false),
+			path: fullPath
+		});
 	});
 
 	// removal of the order_id from the crumbs list?
-	if (crumbs.length > 2) {
+	if (crumbs.length > 3) {
 		crumbs.pop();
 	}
 

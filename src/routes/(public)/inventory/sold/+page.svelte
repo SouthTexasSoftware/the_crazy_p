@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { inventoryStore } from '../../customStores';
-	import type { CrazyProduct } from '../../customTypes';
+	import { inventorySizeStore, inventoryStore } from '../../../customStores';
+	import type { CrazyProduct } from '../../../customTypes';
 	import { onMount } from 'svelte';
 
-	import Product from './Product.svelte';
-
-	let viewSold = false;
-	let singleCol = false;
+	import Product from '../Product.svelte';
 
 	let productList: CrazyProduct[] = [];
+
+	let viewSold = true;
 
 	onMount(setProductList);
 
@@ -23,7 +22,7 @@
 	inventoryStore.subscribe(setProductList);
 </script>
 
-<div class="products" class:single-col={singleCol}>
+<div class="products" class:single-col={!$inventorySizeStore.smallPhotos}>
 	{#each productList as product}
 		<Product productObject={product} {viewSold} />
 	{/each}

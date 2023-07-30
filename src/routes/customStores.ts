@@ -7,7 +7,8 @@ import type {
 	CrazyCustomOrderTemplate,
 	CrazyCustomOrderForm,
 	CrazyAlert,
-	CrazyOwner
+	CrazyOwner,
+	CrazyInventorySize
 } from './customTypes';
 
 export const firebaseStore = writable<CustomFirebaseStore>(undefined);
@@ -27,6 +28,10 @@ export const carouselStore = writable<CrazyCarousel>(undefined);
 export const alertStore = writable<CrazyAlert>(undefined);
 
 export const ownerStore = writable<CrazyOwner>(undefined);
+
+export const inventorySizeStore = writable<CrazyInventorySize>({
+	smallPhotos: true
+});
 
 export async function connectToFirebase() {
 	const appModule = await import('firebase/app');

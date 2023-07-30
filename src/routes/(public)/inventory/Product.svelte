@@ -18,6 +18,8 @@
 		}
 	});
 
+	let soldOrAvailable = productObject.status ? 'available' : 'sold';
+
 	const imageStorageReference = ref(
 		$firebaseStore.storage,
 		'inventory/' + productObject.id + '/' + primaryPhotoFilename
@@ -33,7 +35,7 @@
 	async function goToProductPage(product: CrazyProduct) {
 		selectedProductStore.set(product);
 
-		await goto('/inventory/' + product.name);
+		await goto('/inventory/' + soldOrAvailable + '/' + product.name);
 	}
 </script>
 

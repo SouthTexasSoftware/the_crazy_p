@@ -73,3 +73,7 @@ export interface CrazyAlert {
 export interface CrazyOwner {
 	loggedIn: boolean;
 }
+
+export interface CrazyInventorySize {
+	smallPhotos: boolean;
+}
