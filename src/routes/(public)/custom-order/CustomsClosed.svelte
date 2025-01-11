@@ -20,6 +20,24 @@
 			try {
 				let newDoc = await addDoc(collection($firebaseStore.db, 'email-list'), newDocObject);
 
+				// SEND OWNER NOTIFICATION EMAIL
+				let serverRequest = await fetch('/api/trigger-email', {
+					method: 'POST',
+					body: JSON.stringify({
+						payload: newDocObject,
+						type: 'email-list-addition'
+					}),
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
+
+				let response = await serverRequest.json();
+
+				if (response.error) {
+					throw new Error(response.error);
+				}
+
 				alertStore.set({
 					show: true,
 					type: 'success',

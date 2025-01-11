@@ -60,6 +60,14 @@ async function EmailHandler(type: string, payload: { [key: string]: string }) {
 				email: payload.email
 			};
 			break;
+		case 'email-list-addition':
+			msg.templateId = customOrderTemplateId;
+			msg.dynamicTemplateData = {
+				name: '**Email List Sign Up**',
+				phone: 'N/A',
+				email: payload.email
+			};
+			break;
 		case 'error':
 			msg.templateId = errorTemplateId;
 			msg.dynamicTemplateData = {
